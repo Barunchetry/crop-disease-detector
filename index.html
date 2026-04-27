@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KrishiScan — AI Crop Disease Detector</title>
+  <meta name="description" content="Upload a photo of your crop leaf and get instant AI disease diagnosis with treatment advice. Built for Indian farmers."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Bricolage+Grotesque:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <!-- <link rel="stylesheet" href="css/style.css"/> -->
+   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌾</text></svg>"/>
+</head>
+<body>
+
+<header class="header" id="header">
+  <nav class="nav container">
+    <a href="#" class="nav-logo">
+      <span class="logo-icon">🌾</span>
+      <span>KrishiScan</span>
+    </a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#scanner" class="nav-link">Scan</a></li>
+      <li><a href="#how" class="nav-link">How It Works</a></li>
+      <li><a href="#library" class="nav-link">Library</a></li>
+      <li><a href="#tips" class="nav-link">Tips</a></li>
+    </ul>
+    <div class="nav-actions" id="navAuth">
+      <button class="btn btn-ghost" onclick="openModal('login')">Sign In</button>
+      <button class="btn btn-green" onclick="openModal('register')">Get Started</button>
+    </div>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">
+        <span class="badge-dot"></span> Live AI Detection &nbsp;·&nbsp; Free to Use
+      </div>
+      <h1>Diagnose Crop Diseases<br/><em>Instantly with AI</em></h1>
+      <p>Take a photo of your crop leaf. Our AI identifies the disease, severity level, and gives you a full treatment plan — in seconds, from any device.</p>
+      <div class="hero-cta">
+        <button class="btn btn-green btn-lg" onclick="scrollToScanner()">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Scan Your Crop
+        </button>
+        <a href="#library" class="btn btn-outline btn-lg">Browse Disease Library</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><strong id="statScans">2,400+</strong><span>Total Scans</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><strong id="statDiseases">6+</strong><span>Diseases Tracked</span></div>
+        <div class="hstat-div"></div>
+        <div class="hstat"><strong id="statUsers">800+</strong><span>Farmers Helped</span></div>
+      </div>
+    </div>
+
+    <div class="hero-card-wrap">
+      <div class="hero-card">
+        <div class="hc-header">
+          <div class="hc-crop-icon">🌾</div>
+          <div class="hc-info">
+            <span class="hc-label">Disease Detected</span>
+            <span class="hc-disease">Rice Blast</span>
+          </div>
+          <span class="badge-sev sev-high">High</span>
+        </div>
+        <div class="hc-conf">
+          <div class="hc-conf-labels"><span>AI Confidence</span><span class="conf-val">87%</span></div>
+          <div class="hc-track"><div class="hc-fill" style="width:87%"></div></div>
+        </div>
+        <div class="hc-tabs">
+          <span class="hc-tab active">Treatment</span>
+          <span class="hc-tab">Organic</span>
+          <span class="hc-tab">Prevent</span>
+        </div>
+        <p class="hc-body">Apply Tricyclazole or Isoprothiolane fungicide immediately. Remove and burn all infected plants to stop spread.</p>
+        <div class="hc-footer">
+          <span>🌾 Rice (Oryza sativa)</span>
+          <span class="hc-time">Just now</span>
+        </div>
+      </div>
+      <div class="float-pill fp-1"><span>✅</span><div><b>Confirmed Accurate</b><small>By 87 farmers</small></div></div>
+      <div class="float-pill fp-2"><span>⚡</span><div><b>3 seconds</b><small>Avg scan time</small></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container trust-inner">
+    <span class="trust-label">Supports crops including</span>
+    <div class="trust-list">
+      <span>🌾 Rice</span><span>🍅 Tomato</span><span>🥔 Potato</span>
+      <span>🌿 Wheat</span><span>🌽 Maize</span><span>🌼 Mustard</span>
+      <span>🪴 Jute</span><span>🍃 Tea</span>
+    </div>
+  </div>
+</div>
+
+<!-- SCANNER -->
+<section class="section bg-white" id="scanner">
+  <div class="container">
+    <div class="sec-head">
+      <span class="chip">AI Diagnosis</span>
+      <h2>Scan Your Crop</h2>
+      <p>Upload a clear photo of the affected leaf or stem. Works best in natural daylight.</p>
+    </div>
+    <div class="scanner-grid">
+      <div class="scan-left">
+        <div class="upload-zone" id="uploadZone">
+          <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp"/>
+          <div id="uploadPlaceholder" class="upload-ph">
+            <div class="upload-icon-box">
+              <svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <h3>Drop image here or <u>browse</u></h3>
+            <p>JPG, PNG, WebP &nbsp;·&nbsp; Max 5MB</p>
+          </div>
+          <img id="previewImg" alt="Preview"/>
+        </div>
+
+        <div class="form-field mt-16">
+          <label class="field-label">Crop Type</label>
+          <div class="sel-wrap">
+            <select id="cropSelect"><option value="">Select your crop...</option></select>
+            <svg class="sel-chevron" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+
+        <button class="btn btn-green btn-full btn-lg mt-12" id="analyzeBtn" onclick="analyze()" disabled>
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Analyze Crop
+        </button>
+
+        <div class="scan-tips-box mt-16">
+          <span class="tips-head">Tips for best results</span>
+          <ul>
+            <li>Use natural daylight, avoid shadows</li>
+            <li>Show one leaf with clear symptoms</li>
+            <li>Keep steady — avoid blurry shots</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="resultPanel" class="result-panel">
+        <div class="result-empty">
+          <div class="empty-icon-wrap">
+            <svg width="52" height="52" fill="none" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2"/><text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" font-size="22">🌿</text></svg>
+          </div>
+          <h3>No scan yet</h3>
+          <p>Upload a photo and click Analyze<br/>to get your instant diagnosis</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="container">
+    <div class="sec-head">
+      <span class="chip">Process</span>
+      <h2>How It Works</h2>
+      <p>From photo to treatment plan in under 10 seconds.</p>
+    </div>
+    <div class="steps-wrap">
+      <div class="step-card fade-up">
+        <div class="step-num">01</div>
+        <div class="step-emoji">📸</div>
+        <h3>Take a Photo</h3>
+        <p>Photograph the affected leaf or stem. Close-up shots in good light work best.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card fade-up" style="animation-delay:.1s">
+        <div class="step-num">02</div>
+        <div class="step-emoji">🌾</div>
+        <h3>Select Crop</h3>
+        <p>Choose your crop type. This helps the AI narrow down the most likely diseases.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card fade-up" style="animation-delay:.2s">
+        <div class="step-num">03</div>
+        <div class="step-emoji">🤖</div>
+        <h3>AI Diagnoses</h3>
+        <p>Our model scans the image and matches it against our disease database.</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card fade-up" style="animation-delay:.3s">
+        <div class="step-num">04</div>
+        <div class="step-emoji">💊</div>
+        <h3>Get Treatment</h3>
+        <p>Receive severity rating, organic remedies, chemical options, and prevention tips.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISEASE LIBRARY -->
+<section class="section bg-white" id="library">
+  <div class="container">
+    <div class="sec-head">
+      <span class="chip">Knowledge Base</span>
+      <h2>Disease Library</h2>
+      <p>Common diseases affecting major crops in Northeast India.</p>
+    </div>
+    <div class="disease-grid" id="diseaseGrid">
+      <div class="loading-ph"><div class="spinner"></div><p>Loading disease database...</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section class="section tips-dark" id="tips">
+  <div class="container">
+    <div class="sec-head">
+      <span class="chip chip-white">Expert Advice</span>
+      <h2 style="color:#fff">Farmer's Wisdom</h2>
+      <p style="color:rgba(255,255,255,.5)">Field-proven tips to protect your harvest this season.</p>
+    </div>
+    <div class="tips-grid" id="tipsGrid"></div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="#" class="nav-logo footer-logo"><span class="logo-icon">🌾</span><span>KrishiScan</span></a>
+    <p>AI-Powered Crop Disease Detection &nbsp;·&nbsp; Built for Indian Farmers<br/>BCA Final Year Project &nbsp;·&nbsp; Biswanath College, Assam</p>
+    <p class="footer-dis">⚠ This tool assists diagnosis. Always confirm critical decisions with a local agricultural officer.</p>
+    <p class="footer-copy">© 2025 KrishiScan. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- AUTH MODAL -->
+<div class="modal-overlay" id="authModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-top">
+      <div class="modal-logo-wrap">
+        <span class="modal-logo-icon">🌾</span>
+        <div>
+          <h2>KrishiScan</h2>
+          <p>Save your scans &amp; track results</p>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="modal-tabs">
+      <button class="modal-tab active" data-tab="login" onclick="switchModalTab('login')">Sign In</button>
+      <button class="modal-tab" data-tab="register" onclick="switchModalTab('register')">Create Account</button>
+    </div>
+
+    <div class="modal-body" id="loginForm">
+      <form onsubmit="submitLogin(event)">
+        <div class="form-field">
+          <label class="field-label">Email Address</label>
+          <input class="field-input" type="email" id="loginEmail" placeholder="you@email.com" required/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Password</label>
+          <input class="field-input" type="password" id="loginPass" placeholder="Enter password" required/>
+        </div>
+        <button type="submit" class="btn btn-green btn-full">Sign In →</button>
+        <p class="form-msg" id="loginMsg"></p>
+      </form>
+    </div>
+
+    <div class="modal-body" id="registerForm" style="display:none">
+      <form onsubmit="submitRegister(event)">
+        <div class="form-row-2">
+          <div class="form-field">
+            <label class="field-label">Full Name</label>
+            <input class="field-input" type="text" id="regName" placeholder="Ramesh Kumar" required/>
+          </div>
+          <div class="form-field">
+            <label class="field-label">Phone</label>
+            <input class="field-input" type="tel" id="regPhone" placeholder="98765XXXXX"/>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Email Address</label>
+          <input class="field-input" type="email" id="regEmail" placeholder="you@email.com" required/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">District / Village</label>
+          <input class="field-input" type="text" id="regLocation" placeholder="Biswanath, Assam"/>
+        </div>
+        <div class="form-field">
+          <label class="field-label">Password</label>
+          <input class="field-input" type="password" id="regPass" placeholder="Min 6 characters" required/>
+        </div>
+        <button type="submit" class="btn btn-green btn-full">Create Account →</button>
+        <p class="form-msg" id="registerMsg"></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="js/app.js"></script>
+<script>
+  function toggleMenu(){
+    document.getElementById('navMenu').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('active');
+  }
+  window.addEventListener('scroll',()=>{
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+  });
+</script>
+</body>
+</html>
